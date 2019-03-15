@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>接口自动化测试报告Demo01</title>
+    <meta name="generator" content="HTMLTestRunner 0.9.1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/echarts/3.8.5/echarts.common.min.js"></script>
+    <!-- <script type="text/javascript" src="js/echarts.common.min.js"></script> -->
+
+    
+<style type="text/css" media="screen">
+    body        { font-family: Microsoft YaHei,Consolas,arial,sans-serif; font-size: 80%; }
+    table       { font-size: 100%; }
+    pre         { white-space: pre-wrap;word-wrap: break-word; }
+    /* -- heading ---------------------------------------------------------------------- */
+    h1 {
+        font-size: 16pt;
+        color: gray;
+    }
+    .heading {
+        margin-top: 0ex;
+        margin-bottom: 1ex;
+    }
+    .heading .attribute {
+        margin-top: 1ex;
+        margin-bottom: 0;
+    }
+    .heading .description {
+        margin-top: 2ex;
+        margin-bottom: 3ex;
+    }
+    /* -- css div popup ------------------------------------------------------------------------ */
+    a.popup_link {
+    }
+    a.popup_link:hover {
+        color: red;
+    }
+    .popup_window {
+        display: none;
+        position: relative;
+        left: 0px;
+        top: 0px;
+        /*border: solid #627173 1px; */
+        padding: 10px;
+        /*background-color: #E6E6D6; */
+        font-family: "Lucida Console", "Courier New", Courier, monospace;
+        text-align: left;
+        font-size: 8pt;
+        /* width: 500px;*/
+    }
+    }
+    /* -- report ------------------------------------------------------------------------ */
+    #show_detail_line {
+        margin-top: 3ex;
+        margin-bottom: 1ex;
+    }
+    #result_table {
+        width: 99%;
+    }
+    #header_row {
+        font-weight: bold;
+        color: #303641;
+        background-color: #ebebeb;
+    }
+    #total_row  { font-weight: bold; }
+    .passClass  { background-color: #bdedbc; }
+    .failClass  { background-color: #ffefa4; }
+    .errorClass { background-color: #ffc9c9; }
+    .passCase   { color: #6c6; }
+    .failCase   { color: #FF6600; font-weight: bold; }
+    .errorCase  { color: #c00; font-weight: bold; }
+    .hiddenRow  { display: none; }
+    .testcase   { margin-left: 2em; }
+    /* -- ending ---------------------------------------------------------------------- */
+    #ending {
+    }
+    #div_base {
+                position:absolute;
+                top:0%;
+                left:5%;
+                right:5%;
+                width: auto;
+                height: auto;
+                margin: -15px 0 0 0;
+    }
+</style>
+
+
+</head>
+<body>
+    <script language="javascript" type="text/javascript"><!--
+    output_list = Array();
+    /* level - 0:Summary; 1:Failed; 2:All */
+    function showCase(level) {
+        trs = document.getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+            tr = trs[i];
+            id = tr.id;
+            if (id.substr(0,2) == 'ft') {
+                if (level < 1) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+            if (id.substr(0,2) == 'pt') {
+                if (level > 1) {
+                    tr.className = '';
+                }
+                else {
+                    tr.className = 'hiddenRow';
+                }
+            }
+        }
+    }
+    function showClassDetail(cid, count) {
+        var id_list = Array(count);
+        var toHide = 1;
+        for (var i = 0; i < count; i++) {
+            tid0 = 't' + cid.substr(1) + '.' + (i+1);
+            tid = 'f' + tid0;
+            tr = document.getElementById(tid);
+            if (!tr) {
+                tid = 'p' + tid0;
+                tr = document.getElementById(tid);
+            }
+            id_list[i] = tid;
+            if (tr.className) {
+                toHide = 0;
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            if (toHide) {
+                document.getElementById('div_'+tid).style.display = 'none'
+                document.getElementById(tid).className = 'hiddenRow';
+            }
+            else {
+                document.getElementById(tid).className = '';
+            }
+        }
+    }
+    function showTestDetail(div_id){
+        var details_div = document.getElementById(div_id)
+        var displayState = details_div.style.display
+        // alert(displayState)
+        if (displayState != 'block' ) {
+            displayState = 'block'
+            details_div.style.display = 'block'
+        }
+        else {
+            details_div.style.display = 'none'
+        }
+    }
+    function html_escape(s) {
+        s = s.replace(/&/g,'&amp;');
+        s = s.replace(/</g,'&lt;');
+        s = s.replace(/>/g,'&gt;');
+        return s;
+    }
+    /* obsoleted by detail in <div>
+    function showOutput(id, name) {
+        var w = window.open("", //url
+                        name,
+                        "resizable,scrollbars,status,width=800,height=450");
+        d = w.document;
+        d.write("<pre>");
+        d.write(html_escape(output_list[id]));
+        d.write("\n");
+        d.write("<a href='javascript:window.close()'>close</a>\n");
+        d.write("</pre>\n");
+        d.close();
+    }
+    */
+    --></script>
+    <div id="div_base">
+        
+    <div class='page-header'>
+        <h1>接口自动化测试报告Demo01</h1>
+    <p class='attribute'><strong>开始时间:</strong> 2019-03-15 23:39:40</p>
+<p class='attribute'><strong>运行时长:</strong> 0:00:00.937935</p>
+<p class='attribute'><strong>状态:</strong> 通过 1</p>
+
+    </div>
+    <div style="float: left;width:50%;"><p class='description'>测试者：哇哈哈</p></div>
+    <div id="chart" style="width:50%;height:400px;float:left;"></div>
+
+        
+    <div class="btn-group btn-group-sm">
+        <button class="btn btn-default" onclick='javascript:showCase(0)'>总结</button>
+        <button class="btn btn-default" onclick='javascript:showCase(1)'>失败</button>
+        <button class="btn btn-default" onclick='javascript:showCase(2)'>全部</button>
+    </div>
+    <p></p>
+    <table id='result_table' class="table table-bordered">
+        <colgroup>
+            <col align='left' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+        </colgroup>
+        <tr id='header_row'>
+            <td>测试套件/测试用例</td>
+            <td>总数</td>
+            <td>通过</td>
+            <td>失败</td>
+            <td>错误</td>
+            <td>查看</td>
+        </tr>
+        
+    <tr class='passClass'>
+        <td>test_case.test_case01.Test01</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c1',1)">详情</a></td>
+    </tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_01</div></td>
+    <td colspan='5' align='center'>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt1.1')" >
+        通过</a>
+    <div id='div_pt1.1' class="popup_window">
+        <pre>pt1.1: 每个用例开始之前执行
+{'count': 20, 'start': 0, 'total': 961, 'books': [{'rating': {'max': 10, 'numRaters': 337589, 'average': '9.0', 'min': 0}, 'subtitle': '', 'author': ['[法] 圣埃克苏佩里'], 'pubdate': '2003-8', 'tags': [{'count': 69133, 'name': '小王子', 'title': '小王子'}, {'count': 59134, 'name': '童话', 'title': '童话'}, {'count': 31038, 'name': '经典', 'title': '经典'}, {'count': 28564, 'name': '圣埃克苏佩里', 'title': '圣埃克苏佩里'}, {'count': 25188, 'name': '法国', 'title': '法国'}, {'count': 22453, 'name': '外国文学', 'title': '外国文学'}, {'count': 18970, 'name': '哲学', 'title': '哲学'}, {'count': 13707, 'name': '成长', 'title': '成长'}], 'origin_title': 'Le Petit Prince', 'image': 'https://img3.doubanio.com/view/subject/m/public/s1103152.jpg', 'binding': '平装', 'translator': ['马振聘'], 'catalog': '第一卷 南渡记出版说明人物表序曲第一章 第二章第三章第四章第五章第六章第七章间曲后记第二卷 东藏记人物表……间曲后记\n', 'pages': '97', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s1103152.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s1103152.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s1103152.jpg'}, 'alt': 'https://book.douban.com/subject/1084336/', 'id': '1084336', 'publisher': '人民文学出版社', 'isbn10': '702004249X', 'isbn13': '9787020042494', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/1084336', 'alt_title': 'Le Petit Prince', 'author_intro': '安托万·德·圣埃克苏佩里（Antoine de Saint-Exupery, 1900-1944）1900年6月29日出生在法国里昂。他曾经有志于报考海军学院，未能如愿，却有幸成了空军的一员。1923年退役后，先后从事过各种不同的职业。\n1926年，圣埃克苏佩里进入拉泰科埃尔航空公司。在此期间，出版小说《南方邮件》（1929）、《夜航》（1931），从此他在文学上声誉鹊起。1939年，又一部作品《人的大地》问世。\n第二次世界大战期间他重入法国空军。后辗转去纽约开始流亡生活。在这期间，写出《空军飞行员》、《给一个人质的信》、《小王子》（1943）等作品。1944年返回同盟国地中海空军部队。在当年7月31日的一次飞行任务中，他驾驶飞机飞上湛蓝的天空，就此再也没有回来。', 'summary': '小王子是一个超凡脱俗的仙童，他住在一颗只比他大一丁点儿的小行星上。陪伴他的是一朵他非常喜爱的小玫瑰花。但玫瑰花的虚荣心伤害了小王子对她的感情。小王子告别小行星，开始了遨游太空的旅行。他先后访问了六个行星，各种见闻使他陷入忧伤，他感到大人们荒唐可笑、太不正常。只有在其中一个点灯人的星球上，小王子才找到一个可以作为朋友的人。但点灯人的天地又十分狭小，除了点灯人他自己，不能容下第二个人。在地理学家的指点下，孤单的小王子来到人类居住的地球。\n小王子发现人类缺乏想象力，只知像鹦鹉那样重复别人讲过的话。小王子这时越来越思念自己星球上的那枝小玫瑰。后来，小王子遇到一只小狐狸，小王子用耐心征服了小狐狸，与它结成了亲密的朋友。小狐狸把自己心中的秘密——肉眼看不见事务的本质，只有用心灵才能洞察一切——作为礼物，送给小王子。用这个秘密，小王子在撒哈拉大沙漠与遇险的飞行员一起找到了生命的泉水。最后，小王子在蛇的帮助下离开地球，重新回到他的B612号小行星上。\n童话描写小王子没有被成人那骗人的世界所征服，而最终找到自己的理想。这理想就是连结宇宙万物的爱，而这种爱又是世间所缺少的。因此，小王子常常流露出一种伤感的情绪。作者圣埃克絮佩里在献辞中说：这本书是献给长成了大人的从前那个孩子。\n《小王子》不仅赢得了儿童读者，也为成年人所喜爱，作品凝练的语言渗透了作者对人类及人类文明深邃的思索。它所表现出的讽刺与幻想，真情与哲理，使之成为法国乃至世界上最为著名的一部童话小说。', 'price': '22.00元'}, {'rating': {'max': 10, 'numRaters': 21371, 'average': '7.6', 'min': 0}, 'subtitle': '', 'author': ['[法] 安托万•德•圣埃克苏佩里'], 'pubdate': '2013-1', 'tags': [{'count': 4113, 'name': '小王子', 'title': '小王子'}, {'count': 2976, 'name': '童话', 'title': '童话'}, {'count': 1821, 'name': '外国文学', 'title': '外国文学'}, {'count': 1631, 'name': '经典名著', 'title': '经典名著'}, {'count': 1296, 'name': '成长', 'title': '成长'}, {'count': 1084, 'name': '法国', 'title': '法国'}, {'count': 1077, 'name': '文学', 'title': '文学'}, {'count': 796, 'name': '经典', 'title': '经典'}], 'origin_title': '', 'image': 'https://img3.doubanio.com/view/subject/m/public/s28850934.jpg', 'binding': '精装', 'translator': ['李继宏'], 'catalog': '导读                                 •1•\n小王子                            001', 'ebook_url': 'https://read.douban.com/ebook/1473388/', 'pages': '152', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s28850934.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s28850934.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s28850934.jpg'}, 'alt': 'https://book.douban.com/subject/20443559/', 'id': '20443559', 'publisher': '天津人民出版社', 'isbn10': '7201077643', 'isbn13': '9787201077642', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/20443559', 'alt_title': '', 'author_intro': '原著者\n安托万•德•圣埃克苏佩里（Antoine de Saint-Exupéry，1900-1944）\n法国文学史上最神奇的作家（他同时是个飞行员，参加过两次世界大战），与伏尔泰、卢梭、雨果同入先贤祠。其经典代表作《小王子》问世后获得一致好评，全球销量超过2亿册，被誉 为“人类有史以来最佳读物”。\n1975年，在土木小行星带发现的一颗小行星以圣埃克苏佩里命名；1993年，另一颗小行星被命名为B-612星球，这正是小王子所居住的星球；1994年，法国政府将他和小王子的形象印到了为五十法郎新钞票上；2006年，法国为《小王子》过了60大寿，向全世界宣布：《小王子》满60岁了！\n译者\n李继宏\n生于1980年，祖籍广东，现居上海，翻译家。出版有百万级畅销译著《追风筝的人》《灿烂千阳》《与神对话》等，译著涵盖小说、散文、社会学、经济学、哲学、宗教等领域。', 'summary': '《小王子》是一本足以让人永葆童心的不朽经典，被全球亿万读者誉为非常值得收藏的书。\n遥远星球上的小王子，与美丽而骄傲的玫瑰吵架负气出走，在各星球漫游中，小王子遇到了傲慢的国王、酒鬼、惟利是图的商人，死守教条的地理学家，最后来到地球上，试图找到治愈孤独和痛苦的良方。\n这时，他遇到一只奇怪的狐狸，于是奇妙而令人惊叹的事情发生了……\n《小王子》犹如透亮的镜子，照出了荒唐的成人世界。她在提醒我们，只有爱，才是最高的哲学，才是我们活下去的唯一理由。”', 'ebook_price': '9.99', 'series': {'id': '16643', 'title': '李继宏世界名著新译'}, 'price': '32.00'}, {'rating': {'max': 10, 'numRaters': 7692, 'average': '9.2', 'min': 0}, 'subtitle': '中英法60周年彩色纪念版', 'author': ['[法] 圣·埃克苏佩里'], 'pubdate': '2006-9', 'tags': [{'count': 1635, 'name': '小王子', 'title': '小王子'}, {'count': 1286, 'name': '童话', 'title': '童话'}, {'count': 712, 'name': '圣·埃克苏佩里', 'title': '圣·埃克苏佩里'}, {'count': 678, 'name': '法国', 'title': '法国'}, {'count': 513, 'name': '小王子（中英法60周年彩色纪念版）', 'title': '小王子（中英法60周年彩色纪念版）'}, {'count': 497, 'name': '外国文学', 'title': '外国文学'}, {'count': 469, 'name': '经典', 'title': '经典'}, {'count': 453, 'name': '绘本', 'title': '绘本'}], 'origin_title': '', 'image': 'https://img1.doubanio.com/view/subject/m/public/s2084819.jpg', 'binding': '平装24开', 'translator': ['洪友'], 'catalog': '', 'pages': '186', 'images': {'small': 'https://img1.doubanio.com/view/subject/s/public/s2084819.jpg', 'large': 'https://img1.doubanio.com/view/subject/l/public/s2084819.jpg', 'medium': 'https://img1.doubanio.com/view/subject/m/public/s2084819.jpg'}, 'alt': 'https://book.douban.com/subject/1915170/', 'id': '1915170', 'publisher': '群言出版社', 'isbn10': '780080609X', 'isbn13': '9787800806094', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/1915170', 'alt_title': '', 'author_intro': '圣·埃克苏佩里（1900—1944），出生于法国里昂，1921—1923年在法国空军中服役，曾是后备飞行员，后来又成为民用航空驾驶员，参加了开辟法国一非洲一南美国际航线的工作，其间他还从事文学写作，作品有《南线班机》、《夜航》等等。\n1939年德国法西斯人侵法国，鉴于圣·埃克苏佩里曾多次受伤，医生认为他不能再人伍参战。经过坚决要求，他参加了抗德战争，被编人2/33空军侦察大队。1940年法国在战争中溃败，他所在的部队损失惨重，该部队被调往阿尔及尔。他随后即复员，只身流亡美国。在美国期间，他继续从事写作，发表了《战斗飞行员》、《给一个人质的信》以及《小王子》。\n1943年，在他的强烈要求下，他回到祛国在北非的抗战基地阿尔及尔。上级考虑到他的身体和年龄状况，只同意他执行五次飞行任务，他却要求到八次。1944年7月31日上午，他出航执行第八次任务，从此再也没有回来，牺牲时年仅44岁。', 'summary': '尽管《小王于》这本童话于1943年在美国首次出版，而法国人却只愿意记得它的法国出版日——1946年4月。2006年4月，法国人高调为它过了60岁大寿，他们用法语向全球宣布：《小王子》刚满60周岁！\n几年前，法国人将“20世纪最佳洁语图书”的桂冠授予了《小王子》，《追忆似水年华》等一连串伟大的现代文学经典也只能排名其后。\n《小王于》的叙述者是个飞行员，他在故事一开始告诉读者，他在大人世界找不到一个说话投机的人，因为大人都太讲实际了。接着，飞行员讲了六年前他因飞机故障迫降在撒哈拉沙漠遇见小王子故事。神秘的小王子来自另一个星球。飞行员讲了小王子和他的玫瑰的故事。小王子为什么离开自己的星球；在抵达地球之前，他又访问过哪些星球。他转述了小王子对六个星球的历险，他遇见了国王、爱虚荣的人、酒鬼、商人、点灯人、地理学家、蛇、三枚花瓣的沙漠花、玫瑰园、扳道工、商贩、狐狸以及我们的叙述者飞行员本人。飞行员和小王子在沙漠中共同拥有过一段极为珍贵的友谊。当小王子离开地球时，飞行员非常悲伤。他一直非常怀念他们共度的时光……', 'price': '21.80元'}, {'rating': {'max': 10, 'numRaters': 10448, 'average': '9.1', 'min': 0}, 'subtitle': '', 'author': ['[法] 圣·埃克苏佩里', '[台] 曾铭祥 图'], 'pubdate': '2007-2', 'tags': [{'count': 1703, 'name': '小王子', 'title': '小王子'}, {'count': 1246, 'name': '童话', 'title': '童话'}, {'count': 618, 'name': '法国', 'title': '法国'}, {'count': 519, 'name': '外国文学', 'title': '外国文学'}, {'count': 467, 'name': '经典', 'title': '经典'}, {'count': 291, 'name': '童真', 'title': '童真'}, {'count': 206, 'name': '小说', 'title': '小说'}, {'count': 155, 'name': '文学', 'title': '文学'}], 'origin_title': 'Le Petit Prince', 'image': 'https://img3.doubanio.com/view/subject/m/public/s3344180.jpg', 'binding': '平装', 'translator': ['[台] 姚文雀'], 'catalog': '', 'pages': '135', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s3344180.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s3344180.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s3344180.jpg'}, 'alt': 'https://book.douban.com/subject/1986590/', 'id': '1986590', 'publisher': '新世界出版社', 'isbn10': '780228290X', 'isbn13': '9787802282902', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/1986590', 'alt_title': 'Le Petit Prince', 'author_intro': '圣·埃克苏佩里（1900-1944），出生于法国里昂，1921-1923年在法国空军中服役，曾是后备飞行员，后来又成为民用航空驾驶员，参加了开辟法国—非洲—南美国际航线的工作，其间他还从事文学写作，作品有《南线班机》、《夜航》等等。\n1939年德国法西斯入侵法国，鉴于圣·埃克苏佩里曾多次受伤，，医生认为他不能再入伍参战。经过坚决要求，他参加了抗德战争，被编入2/33空军侦察大队。1940年法国在战争中溃败，他所在的部队损失惨重，该部队被调往阿尔及尔。他随后即复员，只身流亡美国。在美国期间，他继续从事写作，发表了《战斗飞行员》、《给一个人质的信》以及《小王子》。\n1943年，在他的强烈要求下，他回到法国在北非的抗战基地阿尔及尔。上级考虑到他的身体和年龄状况，只同意他执行五次飞行任务，他却要求八次。1944年7月31日上午，他出航执行第八次任务，从此再也没有回来，时年44岁。', 'summary': '《小王子》所讲述的是美丽的伤感故事，飞行员“我”因为飞机出了故障，被迫降落在远离人烟的撒哈拉沙漠上，这时一位迷人而神秘的小男孩出现了，执拗地请“我”给他画一只绵羊。他就是小王子，纯洁、忧郁，来自太阳系中某个不为人知的小行星，爱提问题，对别人的问题却从不作答。在攀谈中小王子的秘密逐渐揭开了，他是因为与他美丽而骄傲的玫瑰发生了感情纠葛才负气出走的。他在各星球中漫游，分别造访了国王、自负的人、酒鬼、商人、掌灯人和地理学家的星球，最后降临到地球上，试图找到疏解孤独和痛苦的良方，小王子结识了狐狸，同狐狸建立了友谊，也从狐狸那里学到了人生的真谛。他决定回到他的玫瑰那里去，但是他的躯壳是难以带走的，于是他决定求助于那条30秒钟内就能致人于死地的毒蛇……', 'price': '22.00元'}, {'rating': {'max': 10, 'numRaters': 7013, 'average': '9.4', 'min': 0}, 'subtitle': '', 'author': ['[法]圣埃克絮佩里'], 'pubdate': '2009-4', 'tags': [{'count': 1325, 'name': '童话', 'title': '童话'}, {'count': 1185, 'name': '小王子', 'title': '小王子'}, {'count': 755, 'name': '法国', 'title': '法国'}, {'count': 687, 'name': '圣埃克絮佩里', 'title': '圣埃克絮佩里'}, {'count': 569, 'name': '外国文学', 'title': '外国文学'}, {'count': 456, 'name': '小王子（三语对照版）', 'title': '小王子（三语对照版）'}, {'count': 427, 'name': '法国文学', 'title': '法国文学'}, {'count': 316, 'name': '小说', 'title': '小说'}], 'origin_title': '', 'image': 'https://img3.doubanio.com/view/subject/m/public/s3750146.jpg', 'binding': '平装', 'translator': ['周克希'], 'catalog': '小王子\nLe Petit Prince\nThe Little Prince', 'ebook_url': 'https://read.douban.com/ebook/5426839/', 'pages': '328', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s3750146.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s3750146.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s3750146.jpg'}, 'alt': 'https://book.douban.com/subject/3693974/', 'id': '3693974', 'publisher': '上海译文出版社', 'isbn10': '7532747964', 'isbn13': '9787532747962', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/3693974', 'alt_title': '', 'author_intro': '安托万·德·圣艾克絮佩里（Antoine de Saint-Exupéry，1900-1944），生于法国里昂一个传统的天主教贵族家庭。1921-1923年在法国空军服役。1926年加入拉泰科雷公司，开始邮航事业。在此期间，出版小说《南方邮件》（1929）、《夜航》（1931），从此他在文学上声誉鹊起。1939年，又一部作品《人类的大地》问世，二战前夕返回法国参加抗德战争。1940年流亡美国，侨居纽约埋头文学创作。1943年参加盟军在北非的抗战。1944年圣艾克絮佩里返回同盟国地中海空军部队。在当年7月31日的一次飞行任务中，他驾驶飞机飞上湛蓝的天空，就此再也没有回来。他的代表作有《南线邮航》（1928）、《夜航》（1931）、《人类的大地》（1939）、《战争飞行员》（1942）、《小王子》（1943）、《堡垒》（1944）。', 'summary': '《小王子》是法国著名作家圣埃克絮佩里的一部响誉世界的畅销童话。本书是中、法、英三种语言对照的版本，采用彩色插图并配有难词解析，可以同时兼顾喜爱《小王子》的读者与英语、法语的学习者。', 'ebook_price': '9.99', 'price': '29.00元'}, {'rating': {'max': 10, 'numRaters': 11969, 'average': '9.2', 'min': 0}, 'subtitle': '', 'author': ['（法）圣埃克苏佩里'], 'pubdate': '2000-9-1', 'tags': [{'count': 3017, 'name': '小王子', 'title': '小王子'}, {'count': 2374, 'name': '童话', 'title': '童话'}, {'count': 1464, 'name': '圣埃克苏佩里', 'title': '圣埃克苏佩里'}, {'count': 1111, 'name': '法国', 'title': '法国'}, {'count': 917, 'name': '经典', 'title': '经典'}, {'count': 788, 'name': '外国文学', 'title': '外国文学'}, {'count': 671, 'name': '感动', 'title': '感动'}, {'count': 502, 'name': '寓言', 'title': '寓言'}], 'origin_title': '', 'image': 'https://img3.doubanio.com/view/subject/m/public/s3294754.jpg', 'binding': '平装', 'translator': ['胡雨苏'], 'catalog': '序言：法兰西玫瑰\n小王子\n圣埃克苏佩里年表\n', 'pages': '111', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s3294754.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s3294754.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s3294754.jpg'}, 'alt': 'https://book.douban.com/subject/1003078/', 'id': '1003078', 'publisher': '中国友谊出版公司', 'isbn10': '7505715666', 'isbn13': '9787505715660', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/1003078', 'alt_title': '', 'author_intro': '圣埃克苏佩里（1900－1944）1900年，尼采逝世。这一年，安德烈・纪德在布鲁塞尔一次会议上宣称：“当今文学土地的面貌可以说是一片沼泽。”1900年，圣埃克苏佩里诞生。净化沼泽的意愿和能力历史地落在这个“世纪儿”的身上，圣埃克苏佩里是尼采式的第二代法国作家，拿但业的儿子，琐罗亚斯德的孙子，这个飞行员受到极大的遗传影响。灾种影响使他在探索、忧虑和英雄主义的道路上走到尽头。如尼采所说：“你应该超截止自己，走得更远，登得更高，直至群星在你脚下。”尼采成为他座舱中想象的伙伴。这个飞越沙漠和海洋的年轻驾驶员同样也遵循着纪德的教诲：“与其过宁静的生活，不如过悲怆的生活。”圣埃克苏佩里在他整个的一生中都在反复思考力量和热诚的真谛。\n圣埃克苏佩里（AntoinedeSaiot-Exupery），1900年出生于法国里昂，1921-1923年在法国空军中服役，曾是后备飞行员，后来又成为民用航空驾驶员，参加了开辟法国――非洲――南美国际航线的工作，其间他还从事文学写作，作品有《南线班机》（1930），《夜航》（1931）等等。\n1939年德国法西斯入侵法国，鉴于圣埃克苏佩里曾多次受伤，医生认为他不能再入伍参战；但经他坚决要求，参加了抗德战争，被编入2/33空军侦察大队。1940年法国在战争中溃败，他所在的部队损失惨重，该部被调往阿尔及尔，随后即被复员，他只身流亡美国。在美国期间，他继续从事写作，1940年发表了《战斗飞行员》，1943年发表了《给一个人质的信》以及《小王子》。\n1943年，在他的强烈要求下，他回到法国在北非的抗战基地阿尔及尔。他的上级考虑到他的身体和年龄状况，只同意他执行五次飞行任务，他却要求到八次，1944年7月31日上午，他出航执行第八次任务，从此再也没有回来，牺牲时，年仅44岁。\n在欧洲某地的一个湖中，发现了圣・德克旭贝里的飞机残骸。这次搜索是经过对他最后一次出航的线路和德军当时的空军记录研究以后进行的，经过认证确认是那架失踪了半个世纪的侦察机。为了纪念这位伟大的战士和文学家，当地决定为这架飞机的残骸建立一个博物馆，以他的名字命名，陈列他的作品和遗物。', 'summary': '小王子驾到！大家好，我是小王子，生活在B612星球，别看我是王子出生，我要做的事也不少，有时给花浇水，有时我还得耐心地把火山口通一通。实在闷得发慌的时候，为了找些事做，学点东西，我也访问一些其他的星球，像325号、326号、327号之类的。当然，我经历的事情也不少，有开心的，也有不开心的。这些事我通常会向地球上一个叫圣埃克苏佩里的人倾诉。对了，你可不要小瞧他，他是拿但业的儿子，琐罗亚斯德的孙子。他还被人们认为尼采式的第二代法国作家。他一生有两大爱好：飞行和写作。我之所以能够这样受欢迎也是他的功劳。因为他把我在其他星球的所见所闻编成了一本小书，也就是你们即将看到的这一本。它不但被誉为有史以来阅读仅次于《圣经》的书，全球发行的语言更是超过100种。可惜的是，在这本书出版后没多久，他在一次架机执行任务时一去不复返了，没有人知道他去了哪里。今天我第一次来到中国，还希望大家同样能够喜欢我。在这本书里他收藏了很多我在其他星球的精美彩图，而且，值得一提的是，中国著名的评论家周国平先生也特意为我作序。可以说，这本书不仅小朋友们爱不释手，就连大人们也会看得如痴如醉。糟糕，我还忘了告诉你，你只有在卓越网（www.joyo.com）才能找到我。有缘的话，我们很快就能相见了。\n尼采、纪德、圣埃克苏佩里是同一家庭的成员，由无可否认的联系连在一起。圣埃克苏佩里热爱尼采。纪德热爱圣埃克苏佩里。\n1945年2月1日《费加罗报》上，他谈到这位飞行员："他无论在何处着陆，都是为了带去欢乐。"\n但是圣埃克苏佩里将公正置于友谊之上。他在《札记》中写道："纪德评价，却不曾体验。"确切的见解。这是行动者面对思想者所感到的骄傲。尼采和纪德孕育了一种道德，并用美妙的文学冲动表现出来。只有圣埃克苏佩里一人在危险和充实中体验了这种道德。他是翱翔于九天的琐罗亚斯德，是乘风飞去的拿但业。他的书房便是机舱。他的格言：事事体验。他的作品：生活。圣埃克苏佩里对尼采的力量和纪德的热诚做作了合理的总结：他的冒险为职业，把写作当嗜好，他在飞行员的位置上实现着克尔桤郭尔的愿望："做一个思想家和做一个人，二者尽量不要区别开来，这样才是明智的。"--（法）玛雅·戴斯特莱姆', 'price': '19.8'}, {'rating': {'max': 10, 'numRaters': 589, 'average': '9.1', 'min': 0}, 'subtitle': '', 'author': ['[法] 安东尼·德·圣-埃克苏佩里'], 'pubdate': '2017-3-1', 'tags': [{'count': 118, 'name': '小王子', 'title': '小王子'}, {'count': 88, 'name': '童话', 'title': '童话'}, {'count': 80, 'name': '经典', 'title': '经典'}, {'count': 71, 'name': '好书，值得一读', 'title': '好书，值得一读'}, {'count': 65, 'name': '法国文学', 'title': '法国文学'}, {'count': 33, 'name': '我想读这本书', 'title': '我想读这本书'}, {'count': 31, 'name': '惊艳的版本', 'title': '惊艳的版本'}, {'count': 27, 'name': '小说', 'title': '小说'}], 'origin_title': 'Le Petit Prince', 'image': 'https://img1.doubanio.com/view/subject/m/public/s29384957.jpg', 'binding': '精装', 'translator': ['树才'], 'catalog': '序 文 1\n小王子 001', 'ebook_url': 'https://read.douban.com/ebook/34616560/', 'pages': '134', 'images': {'small': 'https://img1.doubanio.com/view/subject/s/public/s29384957.jpg', 'large': 'https://img1.doubanio.com/view/subject/l/public/s29384957.jpg', 'medium': 'https://img1.doubanio.com/view/subject/m/public/s29384957.jpg'}, 'alt': 'https://book.douban.com/subject/26974262/', 'id': '26974262', 'publisher': '浙江文艺出版社', 'isbn10': '7533947274', 'isbn13': '9787533947279', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/26974262', 'alt_title': 'Le Petit Prince', 'author_intro': '◆ 作者简介：圣-埃克苏佩里（1900-1944）\n法国有史以来最具传奇性的诗人、小说家、飞行员。\n他最经典的代表作《小王子》，平均每六个法国人就拥有一本，迄今被翻译成317种语言，征服了全球亿万读者，成为出版史上前所未有的奇迹之书。\n为纪念圣-埃克苏佩里， 法国政府将他和小王子的形象印上钞票，国际天文学会分别以他的名字和小王子所在星球B612给宇宙的两颗小行星命名。\n◆ 译者简介：法国政府教育骑士勋章得主  树才\n中国唯一荣获法国政府教育骑士勋章的当代诗人；唯一荣获 “徐志摩诗歌奖” 和“中国桂冠诗歌翻译奖”两项大奖的诗人。傅雷翻译出版奖评委，“十大好诗评选”终审评委。\n2016年成为作家榜签约作家，翻译了法国人的心灵之书《小王子》，文学界人士盛赞，“一定不会再有比树才先生翻译《小王子》 更完美的了。因为他是一位天真得如同圣-埃克苏佩里一样的诗人,他的文字干净、优雅，这也该是每一个读者的幸运。”', 'summary': '◆作家榜官方推荐词：\n这是一本足以让您永葆童心的不朽经典，被全球亿万读者誉为人生必读书。\n遥远星球上的小王子，与美丽而骄傲的玫瑰吵架负气出走，在各星球漫游中，小王子遇到了傲慢的国王，一个任性的酒鬼，一个唯利是图的商人，一个死守教条的地理学家，而后来到地球上，试图找到治 愈 孤独和痛苦的良方。 这时，他遇到一只渴望被驯养的狐狸，于是奇妙而令人惊叹的事情发生了……\n《小王子》犹如透亮的镜子，照出了荒唐的成人世界。它在提醒我们，只有爱，才是终极哲学，才是我们活下去的理由。\n编辑推荐：\n◆2017全新畅销译本，独家无删减精装版。一字未删，完整典藏！\n◆中国首位荣获法国政府教育骑士勋章的传奇诗人树才，译自法国Gallimard出版社1945年权威定本。\n◆此译本出版前在各界名人中试读流传，被誉为迄今为止真正“复活小王子的里程碑式中文版”。\n◆法兰西荣誉军团骑士勋章得主、傅雷翻译奖评委会主席、北京大学法语系主任董强： “树才不仅自己写诗，还教孩子们如何写诗。他时刻保持着一颗童心。这一次，他以他的诗才和童心，精心翻译了这部大人写给小孩的杰作，相信中国的大人和小孩都可以更好地与小王子做朋友。”\n◆内地与香港插画师，历时3个月突破性修复小王子原版46幅全彩插图，带给您前所未有的绝美阅读体验。\n◆独创立体式扉页，裸眼3D式封面设计，内文采用特级护眼环保纸，特别适合大人与孩子一起阅读；独家附赠小王子精美贴纸、特制烫银玫瑰花书签。\n◆“如果你驯养了我，我们就彼此需要了。”——小王子', 'ebook_price': '3.38', 'series': {'id': '37789', 'title': '作家榜经典文库'}, 'price': '39.80元'}, {'rating': {'max': 10, 'numRaters': 7192, 'average': '9.1', 'min': 0}, 'subtitle': '', 'author': ['[法] 圣埃克絮佩里'], 'pubdate': '2007-3', 'tags': [{'count': 1216, 'name': '童话', 'title': '童话'}, {'count': 1215, 'name': '小王子', 'title': '小王子'}, {'count': 736, 'name': '圣埃克絮佩里', 'title': '圣埃克絮佩里'}, {'count': 690, 'name': '法国', 'title': '法国'}, {'count': 535, 'name': '外国文学', 'title': '外国文学'}, {'count': 371, 'name': '经典', 'title': '经典'}, {'count': 346, 'name': '小说', 'title': '小说'}, {'count': 237, 'name': '文学', 'title': '文学'}], 'origin_title': '', 'image': 'https://img3.doubanio.com/view/subject/m/public/s2355916.jpg', 'binding': '平装', 'translator': ['周克希'], 'catalog': '', 'pages': '85', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s2355916.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s2355916.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s2355916.jpg'}, 'alt': 'https://book.douban.com/subject/2039931/', 'id': '2039931', 'publisher': '上海译文出版社', 'isbn10': '7532742008', 'isbn13': '9787532742004', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/2039931', 'alt_title': '', 'author_intro': '', 'summary': '《小王子》是儿童文学作品，也是写给成年人看的童话。用作者圣埃克絮佩里自已的话来说，是写成“还是孩子时”的那个大人看的文学作品。\n整部小说充满诗意的忧郁、淡淡的衰愁，作者通过一位来自不同星球的小王子，用明白如话的语言写出了引人深思的哲理和令人感动的韵味。整部童话，文字很干净，甚至纯净，形式很简洁，甚至简单。因此，这部童话的译文也应该是明白如话的。', 'series': {'id': '1018', 'title': '译文名著文库'}, 'price': '9.00元'}, {'rating': {'max': 10, 'numRaters': 1712, 'average': '9.2', 'min': 0}, 'subtitle': '', 'author': ['圣埃克苏佩里'], 'pubdate': '2010-8-1', 'tags': [{'count': 351, 'name': '童话', 'title': '童话'}, {'count': 329, 'name': '小王子', 'title': '小王子'}, {'count': 178, 'name': '圣埃克苏佩里', 'title': '圣埃克苏佩里'}, {'count': 146, 'name': '温暖', 'title': '温暖'}, {'count': 139, 'name': '绘本', 'title': '绘本'}, {'count': 127, 'name': '外国文学', 'title': '外国文学'}, {'count': 115, 'name': '法国', 'title': '法国'}, {'count': 107, 'name': '法国文学', 'title': '法国文学'}], 'origin_title': '', 'image': 'https://img3.doubanio.com/view/subject/m/public/s27246382.jpg', 'binding': '精装', 'translator': ['林秀清'], 'catalog': '', 'pages': '85', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s27246382.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s27246382.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s27246382.jpg'}, 'alt': 'https://book.douban.com/subject/4987594/', 'id': '4987594', 'publisher': '中国华侨出版社', 'isbn10': '7511305202', 'isbn13': '9787511305206', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/4987594', 'alt_title': '', 'author_intro': '', 'summary': '本书是法国著名飞行员作家圣埃克苏佩里的代表作，讲述了小王子在自己的小行星上与他喜爱的玫瑰花闹了别扭，于是独自一人开始了宇宙旅行。小王子先后到过六个星球，遇到了形形色色的人，最后到达地球。一只狐狸与小王子成为了好朋友，使他懂得了爱与责任，于是小王子想回到自己的星球与花儿团聚……《小王子》出版不久即风靡全球，不仅深得青少年读者的喜爱，而且也受到了成年读者的欢迎。可以说圣埃克苏佩里造就了《小王子》，而《小王子》则成就了圣埃克苏佩里。尽管这本书于1943年在美国首次出版，而法国人却更重视它的法国出版年份——1946年。2006年，他们高调为《小王子》过了60大寿，向世界宣布：《小王子》满60岁了！根据《小王子》官方网站公布的最新数据，此书目前已被译成160余种语言，在全世界已销售8000万册，仅在法国的销量就达到1100万册。几年前，法国举办了“20世纪最佳法语图书”评选活动，《小王子》力压《追忆似水流年》等巨著，搞得桂冠。', 'price': '20.00元'}, {'rating': {'max': 10, 'numRaters': 1619, 'average': '9.3', 'min': 0}, 'subtitle': '', 'author': ['[法]圣埃克斯佩里'], 'pubdate': '2015-10', 'tags': [{'count': 402, 'name': '小王子', 'title': '小王子'}, {'count': 318, 'name': '经典', 'title': '经典'}, {'count': 307, 'name': '童话', 'title': '童话'}, {'count': 270, 'name': '心灵成长', 'title': '心灵成长'}, {'count': 242, 'name': '我想读这本书', 'title': '我想读这本书'}, {'count': 201, 'name': '好书，值得一读', 'title': '好书，值得一读'}, {'count': 186, 'name': '真心想读', 'title': '真心想读'}, {'count': 155, 'name': '喜欢好多年了', 'title': '喜欢好多年了'}], 'origin_title': '', 'image': 'https://img3.doubanio.com/view/subject/m/public/s28301393.jpg', 'binding': '平装', 'translator': ['周天语'], 'catalog': '导读\n小王子', 'pages': '168', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s28301393.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s28301393.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s28301393.jpg'}, 'alt': 'https://book.douban.com/subject/26616226/', 'id': '26616226', 'publisher': '武汉出版社', 'isbn10': '754309522X', 'isbn13': '9787543095229', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/26616226', 'alt_title': '', 'author_intro': '安托万•德•圣埃克斯佩里（1900-1944），法国著名作家和飞行员，出生于里昂的贵族家庭，一生喜欢冒险和自由。代表作有童话《小王子》，小说《南方邮航》、《夜航》，散文集《人的大地》等。作为飞行员，他曾参加了两次世界大战。1944年，在一次飞行任务中，他驾驶飞机飞上湛蓝的天空，就此再也没有回来。', 'summary': '小王子（本版本有别其他兄弟版本，随书赠送一套4张《萌系•小王子恩宠明信片》，由微博当红漫画家小仙绘制。愿你与小王子一起，进入这个被大人遗忘的纯静世界，数亿人为之感动。同名3D动画电影10月16日催泪上映。）\n《小王子》是一本清澈心灵的书，是一本成年人写给成年人的童话。正如书中所说的，水对心是有益处的。而《小王子》就如水般澄清透彻，使人安宁并且心生暖意。整部小说充满诗意的忧郁、淡淡的哀愁，用明白如话的语言写出了引人深思的哲理和令人感动的韵味。这种韵味，具体说来就是简单的形式和 深刻的内涵相契合。整部童话，文字很干净，甚至纯净，形式很简洁，甚至简单。因此，这部童话的译文，也应该是明白如话的。这是一本可以在孩提时代听妈妈朗读的书，也是一本可以在青春时期和恋人一起默念的书，更是一本可以在任何年龄让自己再感受一次纯真的爱，再为纯真的爱而感动一次的书。因为小王子的故事，我们在静静的生活时，心里有着希望和温存，有着感动和关于驯养的责任。\n【编辑推荐】\n1、 全球发行语言超过100种， 销量仅次于《圣经》，数亿人为之感动。\n2、 由知名翻译家周天语倾情翻译，法国“青少年•成长协会”推荐中文译本。\n3、 随书赠送微博知名漫画家小仙绘制小王子明信片四张\n4、 青年作家天爱为本书写2000余字的导读，未读小王子，眼泪已先行。\n5、 同名法国3D动画电影，由马克•奥斯本执导，国内10月16日催泪上映，黄渤、周迅、黄忆慈（多多）、胡海泉、马天宇、TFBOYS易烊千玺、王自健、小柯、袁泉、张译这11位明星，将为这部口碑之作献声。\n【媒体评论】\n莫洛亚曾经表示，他不会试图去解释《小王子〉中的哲理，就像人们不会对一座大教堂或布满星斗的天穹进行解释一样。', 'series': {'id': '31884', 'title': '布偶猫'}, 'price': '29.80'}, {'rating': {'max': 10, 'numRaters': 8195, 'average': '9.2', 'min': 0}, 'subtitle': '', 'author': ['[法] 安东尼·德·圣艾修伯里'], 'pubdate': '2007-8', 'tags': [{'count': 1578, 'name': '小王子', 'title': '小王子'}, {'count': 1147, 'name': '童话', 'title': '童话'}, {'count': 646, 'name': '法国', 'title': '法国'}, {'count': 448, 'name': '圣埃克苏佩里', 'title': '圣埃克苏佩里'}, {'count': 416, 'name': '外国文学', 'title': '外国文学'}, {'count': 342, 'name': '爱', 'title': '爱'}, {'count': 239, 'name': '漫画+绘本', 'title': '漫画+绘本'}, {'count': 223, 'name': '文学', 'title': '文学'}], 'origin_title': 'Le Petit Prince', 'image': 'https://img3.doubanio.com/view/subject/m/public/s2950016.jpg', 'binding': '平装24开', 'translator': ['艾柯'], 'catalog': '', 'pages': '238', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s2950016.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s2950016.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s2950016.jpg'}, 'alt': 'https://book.douban.com/subject/2158463/', 'id': '2158463', 'publisher': '天津教育出版社', 'isbn10': '7530949578', 'isbn13': '9787530949573', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/2158463', 'alt_title': 'Le Petit Prince', 'author_intro': '安东尼·德·圣艾修伯里，1900年出生于法国里昂，1921-1923年在法国空军中服役，曾是后备飞行员，后来又成为民用航空驾驶员，参加了开辟法国——非洲——南美国际航线的工作，其间他带从事文学写作，作品有《南方邮件》（1930），《夜航》（1931）等。在美国期间，他继续从事写作，1940年发表了《战斗的飞行员》，1943年发表了《给一个人质的信》以及《小王子》。\n1943年，在他的强烈要求下，他回到法国在北非的抗战基地阿尔及尔。他的上级考虑到他的身体和年龄状况，只同意他执行五次飞行任务，他却要求增加到八次。1944年7月31日上午，他出航执行第八次任务，从此再也没有回来，失踪时，年仅44岁。', 'summary': '一个来自太阳系中某颗小行星的小王子，因为和他那美丽，骄傲的玫瑰闹了别扭，便只身出走。为了寻求爱和友谊，他访问过六颗行星，见识了这些星球上的国王、自负的人、酒鬼、商人、点灯人和地理学家，最后来到了地球。在撒哈拉大沙漠，一名迫降的飞行员遇见了小王子。他们一点一滴地交心。小王子在这里同狐狸建立了友谊，并通过“驯养”了解了爱的真谛……', 'price': '26.00元'}, {'rating': {'max': 10, 'numRaters': 1041, 'average': '9.4', 'min': 0}, 'subtitle': '世上最美的故事', 'author': ['[法]圣埃克苏佩里', '[韩]金珉志'], 'pubdate': '2008-10', 'tags': [{'count': 203, 'name': '小王子', 'title': '小王子'}, {'count': 159, 'name': '绘本', 'title': '绘本'}, {'count': 133, 'name': '童话', 'title': '童话'}, {'count': 53, 'name': '法国文学', 'title': '法国文学'}, {'count': 46, 'name': '法国', 'title': '法国'}, {'count': 42, 'name': '成长', 'title': '成长'}, {'count': 42, 'name': '外国文学', 'title': '外国文学'}, {'count': 36, 'name': '感动', 'title': '感动'}], 'origin_title': '', 'image': 'https://img1.doubanio.com/view/subject/m/public/s3262337.jpg', 'binding': '精装', 'translator': ['李懿芳'], 'catalog': '', 'pages': '203', 'images': {'small': 'https://img1.doubanio.com/view/subject/s/public/s3262337.jpg', 'large': 'https://img1.doubanio.com/view/subject/l/public/s3262337.jpg', 'medium': 'https://img1.doubanio.com/view/subject/m/public/s3262337.jpg'}, 'alt': 'https://book.douban.com/subject/3218539/', 'id': '3218539', 'publisher': '连环画出版社', 'isbn10': '7505609157', 'isbn13': '9787505609150', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/3218539', 'alt_title': '', 'author_intro': '圣埃克苏佩里（1900-1944），出生于法国里昂，1921-1923年在法国空军中服役，曾是后备飞行员，后来又成为民用航空驾驶员，参加了开辟法国－非洲－南美国际航线的工作，其间他还从事文学写作，作品有《南线班机》、《夜航》等等。\n1939年德国法西斯入侵法国，鉴于圣埃克苏佩里曾多次受伤，医生认为他不能再入伍参战。经过坚决要求，他参加了抗德战争，被编入2/33空军侦察大队。1940年法国在战争中溃败，他所在的部队损失惨重，该部队被调往阿尔及尔。他随后即复员，只身流亡美国。在美国期间，他继续从事写作，发表了《战斗飞行员》、《给一个人质的信》以及《小王子》。1943年，在他的强烈要求下，他回到法国在北非的抗战基地阿尔及尔。上级考虑到他的身体和年龄状况，只同意他执行五次飞行任务，他却要求八次。1944年7月31日上午，他出航执行第八次任务，从此再也没有回来，时年44岁。', 'summary': '《小王子》所讲述的是美丽的伤感故事，飞行员“我”因为飞机出了故障，被迫降落在远离人烟的撒哈拉沙漠上，这时一位迷人而神秘的小男孩出现了，执拗地请“我”给他画一只绵羊。他就是小王子，纯洁、忧郁，来自太阳系中某个不为人知的小行星，爱提问题，对别人的问题却从不作答。在攀谈中小王子的秘密逐渐揭开了，他是因为与他美丽而骄傲的玫瑰发生了感情纠葛才负气出走的。他在各星球中漫游，分别造访了国王、爱慕虚荣的人、酒鬼、企业家、点灯人和地理学家的星球，最后降临到地球上，试图找到疏解孤独和痛苦的良方，小王子结识了狐狸，同狐狸建立了友谊，也从狐狸那里学到了人生的真谛。他决定回到他的玫瑰那里去，但是他的躯壳是难以带走的，于是他决定求助于那条30秒钟就能致人于死地的毒蛇。\n在《小王子》令人眼花缭乱的诸多中译本中，此次由韩国插画作家金珉志插图、李懿芳翻译的四色软精装版本无疑是非常值得收藏的一本。画家在保留作者原来部分插图的基础上，自己又创作了大量精美的彩色插图，风格温婉清新中透出淡淡哀愁；文字排版采用了诗体的格式，与图画的相互呼应中，形成一种疏朗而和谐的韵律，可称图文双美。\n页面中无字的部分也可作为心情的后花园，信手写下一些文字，作为对那一天、那一时、那一刻的记录。“每个人的心中都有一颗B612号小行星”，而这本优雅的图书，就像那颗小行星一样，只属于你一个人。', 'price': '28.80'}, {'rating': {'max': 10, 'numRaters': 3168, 'average': '9.3', 'min': 0}, 'subtitle': '', 'author': ['[法] 安托万·德·圣艾克絮佩里'], 'pubdate': '2007-10', 'tags': [{'count': 624, 'name': '小王子', 'title': '小王子'}, {'count': 395, 'name': '童话', 'title': '童话'}, {'count': 243, 'name': '成人童话', 'title': '成人童话'}, {'count': 224, 'name': '法国', 'title': '法国'}, {'count': 209, 'name': '外国文学', 'title': '外国文学'}, {'count': 127, 'name': '哲学', 'title': '哲学'}, {'count': 93, 'name': '玫瑰花', 'title': '玫瑰花'}, {'count': 58, 'name': '很忧伤', 'title': '很忧伤'}], 'origin_title': 'Le Petit Prince', 'image': 'https://img3.doubanio.com/view/subject/m/public/s4652416.jpg', 'binding': '精装', 'translator': ['黄荭'], 'catalog': '', 'pages': '255', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s4652416.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s4652416.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s4652416.jpg'}, 'alt': 'https://book.douban.com/subject/2278402/', 'id': '2278402', 'publisher': '作家出版社', 'isbn10': '7506340704', 'isbn13': '9787506340700', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/2278402', 'alt_title': 'Le Petit Prince', 'author_intro': '圣克絮佩里的小王子真的存在，不止在他的国，也在现实世界。我幻想，当他独自飞行，在高空俯瞰大地，一次次的事故和意外，孤独与恐惧一点点在心底蔓延，一种对生命的原始思考被唤醒，表述的欲望与深沉的孤寂在寻得一个倾泻的机缘，1935年12月，情感在现实中得以铺陈。圣艾克絮佩里与一名机械师试图创造巴黎到西贡的直飞记录，在离开罗两百公里的沙漠上空迷失方向而迫降，经过3天的倾力挣扎，肉体得到救赎，精神得以超脱，生命最真实的挣扎在叩问着他，答案逼近之时，正是《小王子》完稿之时。', 'summary': '献给雷翁·维尔特请孩子们原谅我把这本书题献给了一个大人。我有一个很充分的理由：这个大人是我在世上最好的朋友。我还有另一个理由：这个大人他什么都能明白，甚至是那些写给孩子们的书。我的第三个理由是：这个大人住在法国，他在那里挨饿受冻。他很需要得到安慰。如果这些理由还不够的话，我很愿意把这本书题献给小时候的他。所有的大人都是自打小孩子过来的。（可惜大人们很少记得这一点）因此，我把题词改为：\n献给还是小男孩时的雷翁·维尔特', 'price': '25.00元'}, {'rating': {'max': 10, 'numRaters': 273, 'average': '9.4', 'min': 0}, 'subtitle': '世界经典立体书珍藏版', 'author': ['安东尼·德·圣埃克苏佩里'], 'pubdate': '2015-9-30', 'tags': [{'count': 198, 'name': '小王子', 'title': '小王子'}, {'count': 132, 'name': '立体书', 'title': '立体书'}, {'count': 96, 'name': '童话', 'title': '童话'}, {'count': 46, 'name': '法国文学', 'title': '法国文学'}, {'count': 43, 'name': '绘本', 'title': '绘本'}, {'count': 38, 'name': '外国文学', 'title': '外国文学'}, {'count': 27, 'name': '小说', 'title': '小说'}, {'count': 26, 'name': '文学', 'title': '文学'}], 'origin_title': 'Le Petit Prince', 'image': 'https://img1.doubanio.com/view/subject/m/public/s28291878.jpg', 'binding': '精装', 'translator': ['黄荭'], 'catalog': '', 'pages': '60', 'images': {'small': 'https://img1.doubanio.com/view/subject/s/public/s28291878.jpg', 'large': 'https://img1.doubanio.com/view/subject/l/public/s28291878.jpg', 'medium': 'https://img1.doubanio.com/view/subject/m/public/s28291878.jpg'}, 'alt': 'https://book.douban.com/subject/26601206/', 'id': '26601206', 'publisher': '陕西人民教育出版社', 'isbn10': '7545037065', 'isbn13': '9787545037067', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/26601206', 'alt_title': 'Le Petit Prince', 'author_intro': '【作者】安东尼•德•圣埃克苏佩里（Antoine de Saint-Exupéry，1900-1944）：法国文学史上最神奇的作家，他同时是个飞行员，参加过两次世界大战。他逝世后，与伏尔泰、卢梭、雨果同入先贤祠。其经典代表作《小王子》问世后获得一致好评，全球销量超过2亿册，被誉 为“人类有史以来最佳读物”。\n【译者】黄荭，1973年生，国内最有名的法语译者之一，同时也是国内顶尖的法国文学研究专家。她是巴黎第三大学文学博士，南京大学文学博士。目前任职于南京大学，担当法语系教授。作为译者，她翻译的《小王子》（作家社版）畅销三十万册，是目前最受好评的译本。作为研究者，他是国内顶尖的杜拉斯研究专家，同时也是杜拉斯译者。她还是一位作家，著有《经过》（黄山书社，2009），《闲来翻书》（上海书店，2010）等书。另外，她还主编了《圣艾克絮佩里作品》全集。', 'summary': '《小王子》立体书是根据安东尼·德·圣埃克苏佩里即原小说作者手绘原稿的制作的立体书，并由“圣埃克苏佩里基金会”独家授权。书中有3D立体纸艺，22个立体页，10个立体翻翻页，震撼重现原书故事！并且，每本书都添加珍藏限量藏书票，极具收藏价值；本书使用了独家授权的原版高清插图，通过全球同步印制实现了与法语版一样的精美品质，内页全部采用纯木浆特种纸，可以长期保存，实现一书永流传。翻开本书，您将看到3D立体效果的小王子故事。', 'series': {'id': '32258', 'title': '乐乐趣童书'}, 'price': '288'}, {'rating': {'max': 10, 'numRaters': 1342, 'average': '9.2', 'min': 0}, 'subtitle': '', 'author': ['圣艾修伯里'], 'pubdate': '2006-01-01', 'tags': [{'count': 296, 'name': '小王子', 'title': '小王子'}, {'count': 232, 'name': '童话', 'title': '童话'}, {'count': 105, 'name': '圣埃克苏佩里', 'title': '圣埃克苏佩里'}, {'count': 101, 'name': '法国', 'title': '法国'}, {'count': 74, 'name': '经典', 'title': '经典'}, {'count': 65, 'name': '温暖书', 'title': '温暖书'}, {'count': 56, 'name': '爱', 'title': '爱'}, {'count': 45, 'name': '外国文学', 'title': '外国文学'}], 'origin_title': '', 'image': 'https://img1.doubanio.com/view/subject/m/public/s1697387.jpg', 'binding': '平装', 'translator': ['艾柯'], 'catalog': '', 'pages': '159 页', 'images': {'small': 'https://img1.doubanio.com/view/subject/s/public/s1697387.jpg', 'large': 'https://img1.doubanio.com/view/subject/l/public/s1697387.jpg', 'medium': 'https://img1.doubanio.com/view/subject/m/public/s1697387.jpg'}, 'alt': 'https://book.douban.com/subject/1490045/', 'id': '1490045', 'publisher': '云南美术出版社', 'isbn10': '7806952721', 'isbn13': '9787806952726', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/1490045', 'alt_title': '', 'author_intro': '安东尼·德·圣艾修伯里，公元1900年生于法国里昂，具有贵族血统。他一生喜爱冒险，是利用飞机将邮件传递到高山和沙漠的先锋。第二次世界大战期间，法国被纳粹占领，他被派往美国，执行勘察飞行员的勤务。他沉浸飞行，喜欢跟死亡打交道，在他致命的、最后的飞行失事前，曾经说过，对于死亡早已做好了准备，甚至还“相当乐意”迎接死亡。1944年，他在一次执行飞行任务中失踪，成为法国文学史上最神秘的一则传奇。\n1921年起圣艾修伯里开始在法国空军中服役，曾是后备飞行员，后来又成为民用航空驾驶员，参加了开辟法国——非洲——南美国际航线的工作，其间他还从事文学写作。1939年德国法西斯入侵法国，鉴于他曾多次受伤，医生认为他不能再入伍参战；但经他坚决要求，参加了抗德战争。1940年法国在战争中溃败，他所在的部队损失惨重，该部被调往阿尔及尔，随后即被复员，他只身流亡美国。\n在飞行期间他还从事文学写作，其亲笔作品有小说《南方邮航》（1929）、《夜间飞行》（1931）、游记散文集《风沙星辰》（1939）、回忆式的《战斗飞行员》（ 1942），书信式的《给一个人质的信》（1943）、童话《小王子》（ 1943），以及他死后了问世的《城堡》等，真中以《小王子》一书最为畅销，全球发行量达5亿册，被誉为阅读率仅次于《圣经》的最佳书籍。', 'summary': '一部全球销量仅次于《圣经》、全球发行的语言超过100种、保守发行量超过5亿本的经典童话故事！《小王子》的魅力已经令好几代人倾倒，它已不再是一部简单的意义上的童话了，它是一部有关于爱的宝典，一部有关于责任的宣言。本书是写给大人也是孩子的美妙书籍，作者借小王子和飞行员之间的友谊，为我们打开个星球之间奇妙的国度。一个平实无华的童话，既没有离奇的情节，也没有惊天动地的壮举，故事在平淡的铺叙中展开，阅读《小王子》长久以来被视为一种必修的文化学分，从九岁到九十九岁，已不限于年龄，每个人都可以以自己的方式来体会书中深远的柔情和哲理……', 'price': '21.8'}, {'rating': {'max': 10, 'numRaters': 10944, 'average': '9.1', 'min': 0}, 'subtitle': '', 'author': ['[法国] 安东·德·圣艾修伯里'], 'pubdate': '2001-11', 'tags': [{'count': 2570, 'name': '小王子', 'title': '小王子'}, {'count': 1921, 'name': '童话', 'title': '童话'}, {'count': 945, 'name': '法国', 'title': '法国'}, {'count': 793, 'name': '经典', 'title': '经典'}, {'count': 622, 'name': '外国文学', 'title': '外国文学'}, {'count': 375, 'name': '法国文学', 'title': '法国文学'}, {'count': 374, 'name': '小说', 'title': '小说'}, {'count': 238, 'name': '文学', 'title': '文学'}], 'origin_title': '', 'image': 'https://img1.doubanio.com/view/subject/m/public/s1471658.jpg', 'binding': '平装', 'translator': ['艾柯'], 'catalog': '', 'pages': '193', 'images': {'small': 'https://img1.doubanio.com/view/subject/s/public/s1471658.jpg', 'large': 'https://img1.doubanio.com/view/subject/l/public/s1471658.jpg', 'medium': 'https://img1.doubanio.com/view/subject/m/public/s1471658.jpg'}, 'alt': 'https://book.douban.com/subject/1021615/', 'id': '1021615', 'publisher': '哈尔滨出版社', 'isbn10': '7806395865', 'isbn13': '9787806395868', 'title': '小王子（中英文对照本）', 'url': 'https://api.douban.com/v2/book/1021615', 'alt_title': '', 'author_intro': '安东・德・圣艾修伯里，1900年生于法国里昂，具有贵族血统。他一生冒险，是利用飞机将邮件传递到高山和沙漠的先锋，同时，二次世界大战，法国被纳粹所占领，他被派飞美国，执行勘察飞行员的勤务。他是一位相当帅沉浸飞行，喜欢跟死亡打交道的人。在他致命的、最后的飞行失事前，即已说过，他对死亡早做好准备，甚至还 “相当乐意”迎接死亡。1944年，圣艾修伯里在一次飞行任务中失踪，成为法国文学史上最神秘的一则传奇。', 'summary': '《小王子》是一部写给大人看的童话，一个世界上最伤心的故事，一则关于爱与责任的寓言。\n小说讲述了一个因飞机失事而滞留非洲大沙漠的飞行员邂逅一个小外星人的故事：小王子是一个忧郁的小人儿，他来自一个很小很小的星球，在那儿什么都好小好小，小王子很容易忧伤，他小小的生命柔情善感……这样令人心疼的小王子，在撒哈拉沙漠中与作者相遇了，他们一点一滴的交心，于是我们跟着小王子哭，跟着小王子笑，跟作者一起，再度成为一个孩子，寻获我们失去的天真与感动……', 'price': '19.80元'}, {'rating': {'max': 10, 'numRaters': 1238, 'average': '8.9', 'min': 0}, 'subtitle': '', 'author': ['【法国】圣埃克苏佩里'], 'pubdate': '2010-1-6', 'tags': [{'count': 247, 'name': '童话', 'title': '童话'}, {'count': 184, 'name': '小王子', 'title': '小王子'}, {'count': 169, 'name': '圣埃克苏佩里', 'title': '圣埃克苏佩里'}, {'count': 124, 'name': '法国文学', 'title': '法国文学'}, {'count': 116, 'name': '经典', 'title': '经典'}, {'count': 108, 'name': '法国', 'title': '法国'}, {'count': 102, 'name': '外国文学', 'title': '外国文学'}, {'count': 63, 'name': '文学', 'title': '文学'}], 'origin_title': 'Le Petit Prince', 'image': 'https://img1.doubanio.com/view/subject/m/public/s27242387.jpg', 'binding': 'Hardcover', 'translator': ['林珍妮', '马振骋'], 'catalog': '小王子（林珍妮译）\n夜航（马振骋译）', 'pages': '183', 'images': {'small': 'https://img1.doubanio.com/view/subject/s/public/s27242387.jpg', 'large': 'https://img1.doubanio.com/view/subject/l/public/s27242387.jpg', 'medium': 'https://img1.doubanio.com/view/subject/m/public/s27242387.jpg'}, 'alt': 'https://book.douban.com/subject/4872917/', 'id': '4872917', 'publisher': '译林出版社', 'isbn10': '7544711323', 'isbn13': '9787544711326', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/4872917', 'alt_title': 'Le Petit Prince', 'author_intro': '安东·圣埃克苏佩里（1900-1944），是法国古老贵族的后裔，他具有双重身份：杰出的飞行员与作家，并且在两个领域中都取得了卓越的成就。著名作品有童话《小王子》、散文《人类的大地》（法兰西学院文学大奖）、小说《南方邮件》、《夜航》、《空军《飞行员》、《要塞》等。', 'summary': '《小王子》是一部充满诗意而又温馨的美丽童话，被翻译成100多种语言，销量仅次于《圣经》。讲述了“我”在浩瀚的撒哈拉大沙漠上遇到了一个古怪奇特而又天真纯洁的小王子——他来自一颗遥远的小星球，游历了分别住着国王、爱慕虚荣的人、酒鬼、商人、地理学家的6个星球。作者通过小王子的游历暗讽了成人世界的荒唐和虚伪，情节别致而曲折，行文富于诗情和哲理，字里行间蕴含着作者对于爱、人生等重大命题的深刻体会与感悟，让人读后回味无穷。', 'series': {'id': '4937', 'title': '经典译林'}, 'price': '12.80元'}, {'rating': {'max': 10, 'numRaters': 918, 'average': '9.0', 'min': 0}, 'subtitle': '', 'author': ['（法）圣埃克苏佩里'], 'pubdate': '2005-01', 'tags': [{'count': 181, 'name': '小王子', 'title': '小王子'}, {'count': 166, 'name': '童话', 'title': '童话'}, {'count': 67, 'name': '法国', 'title': '法国'}, {'count': 64, 'name': '成人的童话世界', 'title': '成人的童话世界'}, {'count': 50, 'name': '外国文学', 'title': '外国文学'}, {'count': 36, 'name': '小说', 'title': '小说'}, {'count': 23, 'name': '每个孩子都应该知道的故事', 'title': '每个孩子都应该知道的故事'}, {'count': 20, 'name': '外国名著', 'title': '外国名著'}], 'origin_title': '', 'image': 'https://img3.doubanio.com/view/subject/m/public/s1863820.jpg', 'binding': '精装', 'translator': ['林珍妮，马振聘'], 'catalog': '小王子\n战机飞行员\n夜航', 'pages': '338', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s1863820.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s1863820.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s1863820.jpg'}, 'alt': 'https://book.douban.com/subject/1024577/', 'id': '1024577', 'publisher': '译林出版社', 'isbn10': '780657218X', 'isbn13': '9787806572184', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/1024577', 'alt_title': '', 'author_intro': '', 'summary': '《小王子》讲述“我”因飞机故障迫降到撒哈拉沙漠上，碰巧遇到一名来自外星的小人儿——小王子。通过与小王子的交流，“我”了解到他所居住的星球的奇特情况以及他在太空中的奇遇:他分别拜访了国王的、爱虚荣人的、酒鬼的、商人的、点灯人的、地理学家的星球，最后来到了巨大的地球。在地球上他又遇到了蛇、玫瑰花、狐狸、扳道工、商贩等等，由此他明白了生活的道理和生命的本质。', 'series': {'id': '4328', 'title': '译林少儿文库'}, 'price': '16.70'}, {'rating': {'max': 10, 'numRaters': 3824, 'average': '9.0', 'min': 0}, 'subtitle': '', 'author': ['[法] 圣埃克絮佩里'], 'pubdate': '2001-6', 'tags': [{'count': 364, 'name': '童话', 'title': '童话'}, {'count': 359, 'name': '小王子', 'title': '小王子'}, {'count': 174, 'name': '圣埃克苏佩里', 'title': '圣埃克苏佩里'}, {'count': 158, 'name': '法国', 'title': '法国'}, {'count': 108, 'name': '外国文学', 'title': '外国文学'}, {'count': 96, 'name': '小说', 'title': '小说'}, {'count': 88, 'name': '经典', 'title': '经典'}, {'count': 70, 'name': '儿童文学', 'title': '儿童文学'}], 'origin_title': '', 'image': 'https://img3.doubanio.com/view/subject/m/public/s1229683.jpg', 'binding': '平装', 'translator': ['周克希'], 'catalog': '\n      ', 'pages': '112', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s1229683.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s1229683.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s1229683.jpg'}, 'alt': 'https://book.douban.com/subject/1048610/', 'id': '1048610', 'publisher': '上海译文出版社', 'isbn10': '7532725901', 'isbn13': '9787532725908', 'title': '小王子', 'url': 'https://api.douban.com/v2/book/1048610', 'alt_title': '', 'author_intro': '圣埃克絮佩里于1900年6月29日出生在法国里昂。他曾经有志于报考海军学院，未能如愿，却有幸成了空军的一员。1923年退役后，先后从事过各种不同的职业。 1926年，圣埃克絮佩里进入拉泰科埃尔航空公司。在此期间，出版小说《南方邮件》（1929）、《夜航》（1931），从此他在文学上声誉鹊起。1939年，又一部作品《人的大地》问世。 第二次世界大战期间他重入法国空军。后辗转去纽约开始流亡生活。在这期间，写出《空军飞行员》、《给一个人质的信》、《小王子》（1943）等作品。1944年返回同盟国地中海空军部队。在当年7月31日的一次飞行任务中，他驾驶飞机飞上湛蓝的天空，就此再也没有回来。', 'summary': '小王子是一个超凡脱俗的仙童，他住在一颗只比他大一丁点儿的小行星上。陪伴他的是一朵他非常喜爱的小玫瑰花。但玫瑰花的虚荣心伤害了小王子对她的感情。小王子告别小行星，开始了遨游太空的旅行。他先后访问了六个行星，各种见闻使他陷入忧伤，他感到大人们荒唐可笑、太不正常。只有在其中一个点灯人的星球上，小王子才找到一个可以作为朋友的人。但点灯人的天地又十分狭小，除了点灯人他自己，不能容下第二个人。在地理学家的指点下，孤单的小王子来到人类居住的地球。\n小王子发现人类缺乏想象力，只知像鹦鹉那样重复别人讲过的话。小王子这时越来越思念自己星球上的那枝小玫瑰。后来，小王子遇到一只小狐狸，小王子用耐心征服了小狐狸，与它结成了亲密的朋友。小狐狸把自己心中的秘密——肉眼看不见事务的本质，只有用心灵才能洞察一切——作为礼物，送给小王子。用这个秘密，小王子在撒哈拉大沙漠与遇险的飞行员一起找到了生命的泉水。最后，小王子在蛇的帮助下离开地球，重新回到他的B612号小行星上。\n童话描写小王子没有被成人那骗人的世界所征服，而最终找到自己的理想。这理想就是连结宇宙万物的爱，而这种爱又是世间所缺少的。因此，小王子常常流露出一种伤感的情绪。作者圣埃克絮佩里在献辞中说：这本书是献给长成了大人的从前那个孩子。\n《小王子》不仅赢得了儿童读者，也为成年人所喜爱，作品凝练的语言渗透了作者对人类及人类文明深邃的思索。它所表现出的讽刺与幻想，真情与哲理，使之成为法国乃至世界上最为著名的一部童话小说。', 'series': {'id': '4363', 'title': '译文童书'}, 'price': '7.40元'}, {'rating': {'max': 10, 'numRaters': 3170, 'average': '7.0', 'min': 0}, 'subtitle': '', 'author': ['[法] 圣-埃克苏佩里'], 'pubdate': '2018-3', 'tags': [{'count': 1111, 'name': '小王子', 'title': '小王子'}, {'count': 756, 'name': '好书，值得一读', 'title': '好书，值得一读'}, {'count': 503, 'name': '经典', 'title': '经典'}, {'count': 488, 'name': '外国文学', 'title': '外国文学'}, {'count': 453, 'name': '成长', 'title': '成长'}, {'count': 353, 'name': '童话', 'title': '童话'}, {'count': 271, 'name': '想读，一定很精彩！', 'title': '想读，一定很精彩！'}, {'count': 252, 'name': '读客', 'title': '读客'}], 'origin_title': 'Le Petit Prince; Terre des hommes; Vol de nuit', 'image': 'https://img3.doubanio.com/view/subject/m/public/s29941500.jpg', 'binding': '平装', 'translator': ['金祎', '徐丽松', '缪咏华'], 'catalog': '《小王子三部曲1：小王子》\n欢迎你从《小王子三部曲》进入读客精神成长文库！\n小王子Chapter1—27\n圣-埃克苏佩里的飞行&amp;文学人生\n读客精神成长路线图\n-\n《小王子三部曲2：风沙星辰》\n航 线\n伙伴们\n飞 机\n飞机与星球\n绿 洲\n在沙漠\n在沙漠的中心\n人 类\n-\n《小王子三部曲3：夜间飞行》\n夜间飞行Chapter1—23', 'pages': '720', 'images': {'small': 'https://img3.doubanio.com/view/subject/s/public/s29941500.jpg', 'large': 'https://img3.doubanio.com/view/subject/l/public/s29941500.jpg', 'medium': 'https://img3.doubanio.com/view/subject/m/public/s29941500.jpg'}, 'alt': 'https://book.douban.com/subject/30170933/', 'id': '30170933', 'publisher': '读客图书·文汇出版社', 'isbn10': '7549624534', 'isbn13': '9787549624539', 'title': '小王子三部曲', 'url': 'https://api.douban.com/v2/book/30170933', 'alt_title': 'Le Petit Prince; Terre des hommes; Vol de nuit', 'author_intro': '圣-埃克苏佩里（Antoine de Saint-Exupéry，1900—1944）\n这是文学史上一个尤为传奇的名字。他是法国国宝级文学大师，同时又是人类历史上首批飞行员。\n在他之前，从未有一位作家，像他一样用飞行员的眼睛俯瞰大地。他被认为是头一个站在宇宙高度观察人类的作家。\n他不凡的人生经历造就了《小王子》这样伟大的作品，而这些经历都写在《夜间飞行》《风沙星辰》里。\n1944年，《小王子》出版次年，他驾驶飞机在地中海上空消失，像小王子一样离开了地球。\n1975年，一颗小行星被命名为“圣-埃克苏佩里”。\n1993年，另一颗小行星被命名为“B612”，这正是小王子星球的名字。', 'summary': '◆ 一直以来，我们只读了《小王子》的三分之一！\n◆《小王子》其实只是《小王子三部曲》的终篇，它的前传《风沙星辰》《夜间飞行》里埋藏着《小王子》真正的深层意义。只有阅读完整的《小王子三部曲》，才能领会小王子是谁，从哪里来，到哪里去，并理解作者最后神秘失踪的必然结局。\n◆《 小王子三部曲》：《小王子》《风沙星辰》《夜间飞行》简体中文版初次完整出版！纪念小王子诞生75周年！\n-\n【内容简介】\n-\n在人类共同的精神世界，《小王子》写尽了灵魂的纯真、赤诚与孤独，登顶“人类有史以来经典读物”书单，被誉为“每个人不可不读的心灵之书”，被译成300多种语言，拥有4亿多读者，阅读率仅次于《圣经》。\n而《小王子》其实只是《小王子三部曲》的终篇，如果没有它的前传《风沙星辰》《夜间飞行》，我们永远不会与《小王子》相遇！\n《小王子三部曲2：风沙星辰》是圣-埃克苏佩里的自传体散文集，以细腻感性的文字记述了他担任飞行员时的冒险经历、旅行见闻和人生哲思，荣获1939年法兰西学院小说大奖、美国国家图书奖。《小王子》中的狐狸、玫瑰、B612星球，包括小王子，都能在《风沙星辰》中找到原型。\n《小王子三部曲3：夜间飞行》描写了三位伟大飞行员与风暴搏斗、与死神擦肩，最终实现夜间飞行创举的故事，荣获法国费米娜文学大奖，诺奖得主纪德为本书作序。书中的种种意象与思考，后来都逐渐幻化为《小王子》的情节。\n-\n【名人及媒体推荐】\n-\n圣-埃克苏佩里生前也是一名飞行家，曾经在驾驶飞机时迫降地球，与死神擦身而过。他之所以幸免于难，恐怕就是为了撰写《风沙星辰》与《小王子》。一旦这个生命任务圆满达成，他又有什么理由继续流连人间？他试着从地球启航高飞，历经许多失败与伤害，终于在蔚蓝的地中海实现了心愿。\n——宫崎骏（日本动画导演）\n-\n像我一样有机会阅读《风沙星辰》《夜间飞行》以及《小王子》这三本书的读者们，可能会得出与我相仿的结论，小王子就是圣-埃克苏佩里本人的化身。\n——胡晴舫（台湾作家）\n-\n将《风沙星辰》《夜间飞行》与《小王子》三本一起读，会读出《小王子》故事看似简易实则深刻的文学涵义，也看见了作者的生命历程如何淬炼了他的写作，他的思想如何像一块外层空间飞来的陨石，原本有棱有角，经过日月磨练，吸收天地精华，风吹雨淋，逐渐磨成一块浑圆无瑕的玉石。\n——胡晴舫（台湾作家）\n-\n《小王子》太出名，以至于我们都忘了圣-埃克苏佩里除作家外真正的人生使命——飞行员。如果没有那段充满传奇色彩的飞行经历，他不会创作出《小王子》这样伟大的作品。\n——读者评论\n-\n圣-埃克苏佩里也许是最被严重低估或是误读的法国作家了，全因为他写出了《小王子》这本远近闻名、超越时间的杰作，但单单一本《小王子》，完全无法反映出其作为一名了不起的写作者的全貌。\n——读者评论\n-\n如果说《小王子》是温暖心脏的光，《风沙星辰》就是沸腾热血的火。\n——读者评论\n-\n《风沙星辰》是一本既美丽又英勇的书，在此价值混乱的时代，每个人都该读它，使我们重拾人性的骄傲与奋激。\n——《纽约时报》\n-\n《夜间飞行》这个感动人心的故事，最令我喜欢的部分就是个中的高贵情操。脆弱、放弃、人的失误等等，毋庸我在此赘言，今日文学唯一最擅长的莫过于揭露上述种种。殊不知，仰仗坚强意志超越自我，这才是文学最需要向我们展现的。\n——安德烈·纪德（法国文学大师，诺贝尔奖得主）\n-\n《小王子》登顶人类有史以来经典读物书单，是每个人不可不读的心灵之书。\n——法国《读书》杂志\n-\n《小王子》是为了大人而写的一部充满激情的寓言。\n——《纽约时报》\n-\n评《小王子》：这是一位大诗人在纾解他无比的孤寂，他传达的讯息引领我们了解生命最大的奥秘。——海德格尔（德国哲学家）\n-\n如果我只有一个月的时间，只一个月，我便去看一本法国作家——圣-埃克苏佩里的《小王子》。用一个月去看它，可以在一生里品味其中优美的情操与思想。\n——三毛（作家）\n-\n《小王子》是天才之作……它是一个奇迹。世上只有极少数作品，如此精美又如此质朴，如此深刻又如此平易近人，从内容到形式都几近于完美，却不落丝毫斧凿痕迹，宛若一块焕然天成的美玉。\n——周国平（作家）', 'series': {'id': '41603', 'title': '读客经典文库'}, 'price': '99.90'}]}
+这是get测试方法
+每个用例结束之后执行
+</pre>
+    </div>
+    <!--css div popup end-->
+    </td>
+</tr>
+
+        <tr id='total_row'>
+            <td>总计</td>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+        <div id='ending'>&nbsp;</div>
+        
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+        // 指定图表的配置项和数据
+        var option = {
+            title : {
+                text: '测试执行情况',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            color: ['#95b75d', 'grey', '#b64645'],
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['通过','失败','错误']
+            },
+            series : [
+                {
+                    name: '测试执行情况',
+                    type: 'pie',
+                    radius : '60%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:1, name:'通过'},
+                        {value:0, name:'失败'},
+                        {value:0, name:'错误'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    
+    </div>
+</body>
+</html>
