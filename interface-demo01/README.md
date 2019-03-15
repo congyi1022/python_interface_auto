@@ -19,7 +19,7 @@
 
 （4）util对测试接口相关方法的封装：HTMLTestRunner.py对生成测试报告进行封装；send_mail.py对发送邮件进行封装；test_get_post.py对接口请求类型进行封装。
 
-### 三、小tip
+## 三、小tip
 
 记得要在每个python文件夹下加上`__init_.py`文件喔~ 
 
