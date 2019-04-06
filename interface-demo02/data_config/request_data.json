@@ -1,0 +1,29 @@
+{
+	"smscode_get":{
+	"mobile": "18888888819",
+	"template":"CAPTCHA_SC_REG",
+	"token": "null"
+	},
+
+    "bysmscode":{
+  "mobile": "18888888821",
+  "captcha": "123456",
+  "password": "123456a",
+  "confirmPassword": "123456a",
+  "token": "null"
+},
+  "bypwd":{
+    "mobile": "18888888821",
+    "password": "123456a",
+    "token": "null"
+},
+
+
+	"engine": {
+		"Accept-Encoding": "gzip"
+	},
+
+	"edrain":{
+	    "partnerId": 5204
+	}
+}
