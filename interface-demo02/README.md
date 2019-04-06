@@ -5,7 +5,8 @@ demo02更新功能：
 1. 通过excel管理测试用例；
 2. 支持json、图片格式作为body发送post请求；
 3. 对excel的测试数据进行变量处理，可以自动生成测试数据；
-4. 保存cookie，方便后续接口使用。
+4. 保存cookie，方便后续接口使用；
+5. 生成log，查看日志。
 
 demo01功能：
 1. 对get/post接口进行封装，实现get/post请求；
