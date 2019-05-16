@@ -4,6 +4,7 @@
 2. 通过Allure生成报告
 
 ## interface-demo03
+满足基本的python自动化接口测试
 #### 实现功能如下：
 1. 通过Pandas读取excel处理数据；
 2. 关联Mysql数据库进行数据的增改查
