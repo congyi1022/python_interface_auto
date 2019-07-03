@@ -1,8 +1,15 @@
-## interface-demo03
+## interface-demo04
 #### 预期实现功能如下：
-1. 优化测试数据驱动，存储读取；
-2. 优化返回值的断言判断；
-3. 关联Mysql数据库进行查询。
+1. 通过pytest进行接口测试
+2. 通过Allure生成报告
+
+## interface-demo03
+满足基本的python自动化接口测试
+#### 实现功能如下：
+1. 通过Pandas读取excel处理数据；
+2. 关联Mysql数据库进行数据的增改查
+3. 对多个sheet进行处理运行
+4. 添加身份证生成工具
 
 ## interface-demo02
 可以通过excel对用例进行管理
