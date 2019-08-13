@@ -1,7 +1,18 @@
-## interface-demo04
+## api_auto_v2
 #### 预期实现功能如下：
-1. 通过pytest进行接口测试
-2. 通过Allure生成报告
+1. 通过Allure生成报告
+1. 查看log
+
+## api_auto_v1：
+使用pytest进行接口测试
+#### 实现功能如下：
+1. 对get/post接口进行封装，实现get/post请求；
+2. 运行pytest框架;
+3. 保存读取cookie，方便后续接口使用；
+4. 支持json、图片格式作为body发送post请求；
+5. 关联Mysql数据库进行数据的增改查；
+6. 通过Yaml保存配置
+7. 添加身份证、手机号码生成
 
 ## interface-demo03
 满足基本的python自动化接口测试
