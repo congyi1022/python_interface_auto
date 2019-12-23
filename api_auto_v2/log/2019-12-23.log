@@ -1,0 +1,5 @@
+[2019-12-23 15:12:37,642]-[INFO]-[logger]--日志信息：【功能描述】：供应链-获取注册验证码
+[2019-12-23 15:12:37,644]-[INFO]-[logger]--日志信息：【请求地址】：http://127.0.0.19:8119/sc/auth/smscode/get
+[2019-12-23 15:12:37,783]-[INFO]-[logger]--日志信息：【Headers 】：{'Product': '31G', 'Content-Type': 'application/json'}
+[2019-12-23 15:12:37,784]-[INFO]-[logger]--日志信息：【请求参数】：{'mobile': '13188887912', 'template': 'CAPTCHA_SC_REG'}
+[2019-12-23 15:12:37,785]-[INFO]-[logger]--日志信息：【Response】：{"success":true,"executed":true,"message":"成功","errorCode":{"code":"SUCCESSFULLY","descr":"成功"}}
