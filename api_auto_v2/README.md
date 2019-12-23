@@ -21,15 +21,15 @@
 
 #### 1）Log记录
 
-![image.png](https://upload-images.jianshu.io/upload_images/1683050-e54c9547ce46df72.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![log.png](https://github.com/edrainann/python_interface_auto/raw/master/README_PHOTOS/log.png)
 
 #### 2）Allure报告
 
-![image.png](https://upload-images.jianshu.io/upload_images/1683050-e1d1780f9060b3ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![allure.png](https://github.com/edrainann/python_interface_auto/raw/master/README_PHOTOS/allure.png)
 
 #### 3）Swagger界面
 
-![image.png](https://upload-images.jianshu.io/upload_images/1683050-959718f3604aab70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![swagger.png](https://github.com/edrainann/python_interface_auto/raw/master/README_PHOTOS/swagger.png)
 
 
 
