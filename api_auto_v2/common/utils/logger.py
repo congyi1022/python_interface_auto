@@ -4,15 +4,14 @@
 # @Author  : Edrain
 import logging
 import os
-import re
 import time
 from pathlib import Path
+from api_auto_v2.select_env import home_path
 
 
 class Logger:
 
     def __init__(self):
-        home_path = re.findall(r".*?api_auto_v3", str(Path.cwd()))  # 正则匹配出文件夹的主路径
         log_name = time.strftime("%Y-%m-%d") + ".log"
         path = Path(home_path[0]) / "log" / log_name  # 路径拼接
         log_path = str(path)

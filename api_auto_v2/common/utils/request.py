@@ -66,12 +66,10 @@ def headers_content_type(method, url, params, content_type, detail_headers):
     :return:
     """
     global req  # global代表应用全局变量
-    if content_type == ContentTypeEnums.APPLICATION_JSON.value:
+    if content_type in [ContentTypeEnums.APPLICATION_JSON.value, ContentTypeEnums.CUSTOMIZE.value]:
         req = requests.request(method, url, data=json.dumps(params), headers=detail_headers)
     elif content_type == ContentTypeEnums.FORM_DATA.value:
         req = requests.request(method, url, data=params[0], files=params[1], headers=detail_headers)
-    elif content_type == ContentTypeEnums.CUSTOMIZE.value:
-        req = requests.request(method, url, data=json.dumps(params), headers=detail_headers)
     else:
         req = requests.request(method, url, params=params, headers=detail_headers)
     Logger().info(f'【Headers 】：{detail_headers}')
